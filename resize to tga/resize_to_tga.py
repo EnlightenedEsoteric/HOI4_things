@@ -1,18 +1,20 @@
 from PIL import Image
-from rtt_settings import output_dir,output_sizes
+from rtt_settings import flag_folder,output_sizes
 
 
 inp = input("Please input file path: ")
-name = input("Please input name of file: ")
+name = input("Please input name of file: e.g., SCO_communism, ALB_neutrality\n: ")
 
 
 with Image.open(inp) as im:
 
-    for index, size in enumerate(output_sizes):
-        im_out = im.resize(size)
-        print(f'{output_dir}/{index}{name}.tga')
-        im_out.save(f'{output_dir}/{index}{name}.tga')
+    im_out = im.resize(output_sizes[0])
+    im_out.save(f'{flag_folder}/small/{name}.tga')
 
+    im_out = im.resize(output_sizes[1])
+    im_out.save(f'{flag_folder}/medium/{name}.tga')
+
+    im_out = im.resize(output_sizes[2])
+    im_out.save(f'{flag_folder}/{name}.tga')
 
     input('Done!') # stops it from closing automatically
-
